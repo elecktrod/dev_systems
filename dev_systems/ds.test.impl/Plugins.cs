@@ -21,14 +21,18 @@ namespace ds.test.impl
         /// </summary>
         public static IPlugin GetPlugin(string pluginName)
         {
-            try
+            switch (pluginName)
             {
-                Type t = Type.GetType(typeof(BasePlagin).Namespace + "." + pluginName, true);
-                return (IPlugin)Activator.CreateInstance(t);
-            }
-            catch
-            {
-                throw new ArgumentException("Plugin with this name not found.");
+                case nameof(AdditionPlagin):
+                    return new AdditionPlagin();
+                case nameof(SubtractionPlagin):
+                    return new SubtractionPlagin();
+                case nameof(MultiplicationPlugin):
+                    return new MultiplicationPlugin();
+                case nameof(DivisionPlugin):
+                    return new DivisionPlugin();
+                default:
+                    throw new ArgumentException("Plugin with this name not found.");
             }
         }
     }
